@@ -29,8 +29,8 @@ public class Main {
             int log = Integer.parseInt(st.nextToken());
 
             int teamScore[][] = new int[n + 1][problem + 1];
-            HashMap<Integer, Integer> submitCnt = new HashMap<>();
-            HashMap<Integer, Integer> submitTime = new HashMap<>();
+            int submitCnt[] = new int[n + 1];
+            int submitTime[] = new int[n + 1];
 
             for (int i = 0; i < log; i++) {
                 st = new StringTokenizer(br.readLine());
@@ -39,8 +39,8 @@ public class Main {
                 int score = Integer.parseInt(st.nextToken());
 
                 teamScore[teamNum][problemNum] = Math.max(teamScore[teamNum][problemNum], score);
-                submitCnt.put(teamNum, submitCnt.getOrDefault(teamNum, 0) + 1);
-                submitTime.put(teamNum, i + 1);
+                submitCnt[teamNum]++;
+                submitTime[teamNum] = i + 1;
             }
 
             List<Team> list = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Main {
                 for (int j = 1; j <= problem; j++) {
                     sum += teamScore[i][j];
                 }
-                list.add(new Team(i, submitCnt.get(i), sum, submitTime.get(i)));
+                list.add(new Team(i, submitCnt[i], sum, submitTime[i]));
             }
 
             list.sort((o1, o2) -> {
@@ -62,7 +62,7 @@ public class Main {
                 }
                 return o2.score - o1.score;
             });
-            
+
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).teamNum == myTeam) {
                     sb.append(i + 1).append("\n");
