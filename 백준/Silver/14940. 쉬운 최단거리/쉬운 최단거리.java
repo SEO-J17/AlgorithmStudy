@@ -11,8 +11,6 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         int arr[][] = new int[n][m];
-        boolean visit[][] = new boolean[n][m];
-        int map[][] = new int[n][m];
 
         Point start = null;
         for (int i = 0; i < n; i++) {
@@ -22,15 +20,14 @@ public class Main {
                 if (num == 2) {
                     start = new Point(i, j);
                     arr[i][j] = 0;
-                } else {
-                    arr[i][j] = num;
+                } else if (num == 1) {
+                    arr[i][j] = -1;
                 }
             }
         }
 
         Queue<Point> qu = new LinkedList<>();
         qu.add(start);
-        visit[start.x][start.y] = true;
 
         int dx[] = {0, 0, -1, 1};
         int dy[] = {-1, 1, 0, 0};
@@ -40,25 +37,21 @@ public class Main {
                 int xx = point.x + dx[i];
                 int yy = point.y + dy[i];
                 if (xx >= 0 && yy >= 0 && xx < n && yy < m) {
-                    if (arr[xx][yy] == 1 && !visit[xx][yy]) {
-                        map[xx][yy] = map[point.x][point.y] + 1;
-                        visit[xx][yy] = true;
+                    if (arr[xx][yy] == -1) {
+                        arr[xx][yy] = arr[point.x][point.y] + 1;
                         qu.add(new Point(xx, yy));
                     }
                 }
             }
         }
-        
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (map[i][j] == 0 && arr[i][j] == 1) {
-                    sb.append(-1).append(" ");
-                } else {
-                    sb.append(map[i][j]).append(" ");
-                }
+                sb.append(arr[i][j]).append(" ");
             }
             sb.append("\n");
         }
+
         System.out.println(sb);
     }
 }
