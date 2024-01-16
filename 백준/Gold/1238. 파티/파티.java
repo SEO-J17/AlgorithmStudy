@@ -38,8 +38,8 @@ public class Main {
         for (int i = 1; i <= n; i++) {
             int time = calc(i, x, n) + calc(x, i, n);
             answer = Math.max(time, answer);
-
         }
+
         System.out.println(answer);
     }
 
