@@ -12,7 +12,6 @@ public class Main {
         }
     }
 
-    static ArrayList<Node> list[];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,7 +20,8 @@ public class Main {
         int m = Integer.parseInt(st.nextToken());
         int x = Integer.parseInt(st.nextToken());
 
-        list = new ArrayList[n + 1];
+        ArrayList<Node> list[] = new ArrayList[n + 1];
+        ArrayList<Node> reverseList[] = new ArrayList[n + 1];
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int node1 = Integer.parseInt(st.nextToken());
@@ -31,19 +31,25 @@ public class Main {
             if (list[node1] == null) {
                 list[node1] = new ArrayList<>();
             }
+            if (reverseList[node2] == null) {
+                reverseList[node2] = new ArrayList<>();
+            }
             list[node1].add(new Node(node2, time));
+            reverseList[node2].add(new Node(node1, time));
         }
-
+        
+        int dist[] = calc(x, n, list);
+        int reverseDist[] = calc(x, n, reverseList);
         int answer = 0;
+
         for (int i = 1; i <= n; i++) {
-            int time = calc(i, x, n) + calc(x, i, n);
-            answer = Math.max(time, answer);
+            answer = Math.max(answer, dist[i] + reverseDist[i]);
         }
 
         System.out.println(answer);
     }
 
-    private static int calc(int start, int destination, int n) {
+    private static int[] calc(int start, int n, ArrayList<Node> list[]) {
         boolean visit[] = new boolean[n + 1];
         int dist[] = new int[n + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
@@ -66,6 +72,6 @@ public class Main {
             }
         }
 
-        return dist[destination];
+        return dist;
     }
 }
