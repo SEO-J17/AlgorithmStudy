@@ -21,6 +21,7 @@ public class Main {
 
         ArrayList<Node> list[] = new ArrayList[n + 1];
         int dist[] = new int[n + 1];
+        boolean visit[] = new boolean[n + 1];
 
         Arrays.fill(dist, Integer.MAX_VALUE);
 
@@ -43,6 +44,13 @@ public class Main {
 
         while (!qu.isEmpty()) {
             Node node = qu.poll();
+
+            if (visit[node.dest]) {
+                continue;
+            }
+            
+            visit[node.dest] = true;
+
             for (Node nextNode : list[node.dest]) {
                 if (dist[nextNode.dest] > dist[node.dest] + nextNode.weight) {
                     dist[nextNode.dest] = dist[node.dest] + nextNode.weight;
