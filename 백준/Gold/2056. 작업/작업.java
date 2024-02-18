@@ -7,7 +7,7 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
         int arr[] = new int[n + 1];
         ArrayList<Integer> list[] = new ArrayList[n + 1];
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int job[] = new int[n + 1];
 
         for (int i = 1; i <= n; i++) {
             list[i] = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int jobTime = Integer.parseInt(st.nextToken());
             int jobNum = Integer.parseInt(st.nextToken());
-            map.put(i, jobTime);
+            job[i] = jobTime;
 
             for (int j = 0; j < jobNum; j++) {
                 int node = Integer.parseInt(st.nextToken());
@@ -30,7 +30,7 @@ public class Main {
         int time[] = new int[n + 1];
 
         for (int i = 1; i <= n; i++) {
-            time[i] = map.get(i);
+            time[i] = job[i];
 
             if (arr[i] == 0) {
                 qu.add(i);
@@ -43,7 +43,7 @@ public class Main {
             for (int next : list[current]) {
                 arr[next]--;
 
-                time[next] = Math.max(time[next], map.get(next) + time[current]);
+                time[next] = Math.max(time[next], job[next] + time[current]);
                 if (arr[next] == 0) {
                     qu.add(next);
                 }
