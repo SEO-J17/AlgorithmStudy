@@ -12,9 +12,9 @@ public class Main {
         for (int i = 1; i <= n; i++) {
             list[i] = new ArrayList<>();
         }
-
+        StringTokenizer st;
         for (int i = 1; i <= n; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             int jobTime = Integer.parseInt(st.nextToken());
             int jobNum = Integer.parseInt(st.nextToken());
             job[i] = jobTime;
