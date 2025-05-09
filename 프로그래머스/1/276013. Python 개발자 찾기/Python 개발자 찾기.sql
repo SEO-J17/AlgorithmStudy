@@ -1,5 +1,6 @@
--- 코드를 작성해주세요
-select ID, EMAIL, FIRST_NAME, LAST_NAME
-FROM DEVELOPER_INFOS
-WHERE SKILL_1 = 'Python' OR SKILL_2 = 'Python' OR SKILL_3 = 'Python'
-ORDER BY ID;
+select ID,EMAIL,FIRST_NAME,LAST_NAME
+from DEVELOPER_INFOS
+where SKILL_1 = 'Python'
+or SKILL_2 = 'Python'
+or SKILL_3 = 'Python'
+order by ID
